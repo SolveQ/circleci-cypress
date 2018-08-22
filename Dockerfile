@@ -10,11 +10,11 @@ WORKDIR /usr/src/app
 
 RUN sudo yarn add cypress@3.1.0
 
-ONBUILD COPY ./cypress.json /usr/src/app/cypress.json
-ONBUILD COPY ./e2e /usr/src/app/e2e
+COPY ./cypress.json /usr/src/app/cypress.json
+COPY ./e2e /usr/src/app/e2e
 
-ONBUILD RUN sudo ./node_modules/.bin/cypress verify
+RUN sudo ./node_modules/.bin/cypress verify
 
-ONBUILD RUN sudo Xvfb :1 -screen 0 '1280x1024x16' -ac &> /dev/null
+RUN sudo Xvfb :1 -screen 0 '1280x1024x16' -ac &> /dev/null
 
 ENV DISPLAY=1
