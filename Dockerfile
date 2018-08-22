@@ -1,5 +1,7 @@
 FROM circleci/node:10.0.0
 
+USER root
+
 RUN sudo apt-get update --fix-missing
 RUN sudo apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
 
@@ -8,7 +10,7 @@ WORKDIR /usr/src/app
 
 RUN sudo yarn add cypress@3.1.0
 
-ONBUILD COPY cypress.json /usr/src/app/cypress.json
+ONBUILD COPY ./cypress.json /usr/src/app/cypress.json
 ONBUILD COPY ./e2e /usr/src/app/e2e
 
 ONBUILD RUN sudo ./node_modules/.bin/cypress verify
